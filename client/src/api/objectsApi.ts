@@ -1,11 +1,10 @@
 import axios from "axios";
 import { IObject } from "../types";
 
-const API_BASE = "http://localhost:5000/api";
-const SERVER_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const api = axios.create({
-  baseURL: API_BASE,
+  baseURL: `${BASE_URL}/api`,
 });
 
 export const getAllObjects = async (): Promise<IObject[]> => {
@@ -23,7 +22,10 @@ export const getObjectById = async (objectId: string): Promise<IObject> => {
   return data;
 };
 
-export const uploadAttachments = async (objectId: string, files: File[]): Promise<IObject> => {
+export const uploadAttachments = async (
+  objectId: string,
+  files: File[]
+): Promise<IObject> => {
   const formData = new FormData();
   files.forEach((file) => formData.append("files", file));
 
@@ -34,10 +36,14 @@ export const uploadAttachments = async (objectId: string, files: File[]): Promis
       headers: { "Content-Type": "multipart/form-data" },
     }
   );
+
   return data;
 };
 
-export const deleteAttachment = async (objectId: string, fileName: string): Promise<IObject> => {
+export const deleteAttachment = async (
+  objectId: string,
+  fileName: string
+): Promise<IObject> => {
   const { data } = await api.delete(
     `/objects/${objectId}/attachments/${fileName}`
   );
@@ -45,7 +51,7 @@ export const deleteAttachment = async (objectId: string, fileName: string): Prom
 };
 
 export const getFileUrl = (filePath: string): string => {
-  return `${SERVER_URL}/${filePath}`;
+  return `${BASE_URL}/${filePath}`;
 };
 
 export default api;
