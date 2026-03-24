@@ -14,11 +14,15 @@ export const getAllObjects = async (req: Request, res: Response) => {
 
 export const createObject = async (req: Request, res: Response) => {
   try {
-    const { title } = req.body;
-    if (!title || !title.trim()) {
+    let { title } = req.body;
+
+    title = title?.trim();
+
+    if (!title) {
       return res.status(400).json({ message: "Title is required" });
     }
-    const newObject = await ObjectModel.create({ title: title.trim() });
+
+    const newObject = await ObjectModel.create({ title });
     res.status(201).json(newObject);
   } catch (error) {
     res.status(500).json({ message: "Failed to create object" });
