@@ -1,6 +1,6 @@
 import { ConfigProvider, theme } from "antd";
 import ObjectDetails from "./pages/ObjectDetails";
-import "./index.css";
+import "./index.module.css";
 
 export default function App() {
   return (

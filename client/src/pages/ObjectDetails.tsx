@@ -18,6 +18,7 @@ import AttachmentList from "../components/AttachmentList";
 import UploadButton from "../components/UploadButton";
 import CreateObjectModal from "../components/CreateObjectModal";
 import { IObject } from "../types";
+import styles from "../index.module.css";
 
 const { Title, Text } = Typography;
 
@@ -48,9 +49,9 @@ export default function ObjectDetails() {
   };
 
   return (
-    <div className="app-layout">
-      <aside className="sidebar">
-        <div className="sidebar-header">
+    <div className={styles["app-layout"]}>
+      <aside className={styles.sidebar}>
+        <div className={styles["sidebar-header"]}>
           <Space align="center">
             <AppstoreOutlined style={{ fontSize: 20 }} />
             <Title level={4} style={{ margin: 0, color: "#fff" }}>
@@ -60,9 +61,9 @@ export default function ObjectDetails() {
           <CreateObjectModal onSubmit={handleCreateObject} />
         </div>
 
-        <div className="sidebar-list">
+        <div className={styles["sidebar-list"]}>
           {loading && objects.length === 0 ? (
-            <div className="center-spin">
+            <div className={styles["center-spin"]}>
               <Spin />
             </div>
           ) : objects.length === 0 ? (
@@ -80,16 +81,16 @@ export default function ObjectDetails() {
               renderItem={(obj: IObject) => (
                 <div
                   key={obj._id}
-                  className={`sidebar-item ${
-                    currentObject?._id === obj._id ? "active" : ""
+                  className={`${styles["sidebar-item"]} ${
+                    currentObject?._id === obj._id ? styles.active : ""
                   }`}
                   onClick={() => handleSelectObject(obj._id)}
                 >
-                  <FolderOpenOutlined className="sidebar-item-icon" />
-                  <div className="sidebar-item-content">
+                  <FolderOpenOutlined className={styles["sidebar-item-icon"]} />
+                  <div className={styles["sidebar-item-content"]}>
                     <Text
                       ellipsis
-                      className="sidebar-item-title"
+                      className={styles["sidebar-item-title"]}
                     >
                       {obj.title}
                     </Text>
@@ -107,9 +108,9 @@ export default function ObjectDetails() {
         </div>
       </aside>
 
-      <main className="main-content">
+      <main className={styles["main-content"]}>
         {!currentObject ? (
-          <div className="empty-state">
+          <div className={styles["empty-state"]}>
             <FolderOpenOutlined style={{ fontSize: 64, color: "#6c5ce7" }} />
             <Title level={3} style={{ color: "#a0a0b0", marginTop: 16 }}>
               Select an object to view details
@@ -119,8 +120,8 @@ export default function ObjectDetails() {
             </Text>
           </div>
         ) : (
-          <div className="details-container">
-            <div className="details-header">
+          <div className={styles["details-container"]}>
+            <div className={styles["details-header"]}>
               <div>
                 <Title level={2} style={{ margin: 0 }}>
                   {currentObject.title}
@@ -132,7 +133,7 @@ export default function ObjectDetails() {
             </div>
 
             <Card
-              className="attachments-card"
+              className={styles["attachments-card"]}
               title={
                 <Space>
                   <PaperClipOutlined />
@@ -152,7 +153,7 @@ export default function ObjectDetails() {
               }
             >
               {loading ? (
-                <div className="center-spin">
+                <div className={styles["center-spin"]}>
                   <Spin size="large" />
                 </div>
               ) : (

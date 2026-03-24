@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Button } from "antd";
 import { PaperClipOutlined, LoadingOutlined } from "@ant-design/icons";
+import styles from "../index.module.css";
 
 interface UploadButtonProps {
   onFilesSelected: (files: File[]) => void;
@@ -46,7 +47,7 @@ export default function UploadButton({ onFilesSelected, uploading }: UploadButto
         onClick={handleClick}
         disabled={uploading}
         size="large"
-        className="upload-btn"
+        className={styles["upload-btn"]}
       >
         {uploading ? "Uploading..." : "Attach Files"}
       </Button>

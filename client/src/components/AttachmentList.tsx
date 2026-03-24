@@ -7,6 +7,7 @@ import {
 import { getFileIcon, formatFileSize } from "../utils/fileHelpers";
 import { getFileUrl } from "../api/objectsApi";
 import { IAttachment } from "../types";
+import styles from "../index.module.css";
 
 const { Text } = Typography;
 
@@ -41,7 +42,7 @@ export default function AttachmentList({ attachments, objectId, onDelete }: Atta
 
         return (
           <List.Item
-            className="attachment-item"
+            className={styles["attachment-item"]}
             actions={[
               <Tooltip title="View file" key="view">
                 <Button
@@ -49,7 +50,7 @@ export default function AttachmentList({ attachments, objectId, onDelete }: Atta
                   icon={<EyeOutlined />}
                   href={fileUrl}
                   target="_blank"
-                  className="action-btn view-btn"
+                  className={`${styles["action-btn"]} ${styles["view-btn"]}`}
                 />
               </Tooltip>,
               <Tooltip title="Download" key="download">
@@ -59,7 +60,7 @@ export default function AttachmentList({ attachments, objectId, onDelete }: Atta
                   href={fileUrl}
                   download={file.originalName}
                   target="_blank"
-                  className="action-btn download-btn"
+                  className={`${styles["action-btn"]} ${styles["download-btn"]}`}
                 />
               </Tooltip>,
               <Popconfirm
@@ -76,7 +77,7 @@ export default function AttachmentList({ attachments, objectId, onDelete }: Atta
                     type="text"
                     danger
                     icon={<DeleteOutlined />}
-                    className="action-btn delete-btn"
+                    className={`${styles["action-btn"]} ${styles["delete-btn"]}`}
                   />
                 </Tooltip>
               </Popconfirm>,
@@ -89,13 +90,13 @@ export default function AttachmentList({ attachments, objectId, onDelete }: Atta
                   href={fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="file-link"
+                  className={styles["file-link"]}
                 >
                   {file.originalName}
                 </a>
               }
               description={
-                <div className="file-meta">
+                <div className={styles["file-meta"]}>
                   <Tag color="blue">{formatFileSize(file.size)}</Tag>
                   <Text type="secondary" style={{ fontSize: 12 }}>
                     {uploadDate}

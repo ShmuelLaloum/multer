@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Modal, Input, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { IObject } from "../types";
+import styles from "../index.module.css";
 
 interface CreateObjectModalProps {
   onSubmit: (title: string) => Promise<IObject | null>;
@@ -30,7 +31,7 @@ export default function CreateObjectModal({ onSubmit }: CreateObjectModalProps) 
         icon={<PlusOutlined />}
         onClick={() => setOpen(true)}
         size="large"
-        className="create-btn"
+        className={styles["create-btn"]}
       >
         New Object
       </Button>
